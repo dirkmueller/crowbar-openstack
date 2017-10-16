@@ -27,6 +27,7 @@ default[:neutron][:lbaas_service_file] = "/etc/neutron/neutron-server.conf.d/100
 default[:neutron][:lbaas_config_file] = "/etc/neutron/neutron.conf.d/110-neutron_lbaas.conf"
 default[:neutron][:l3_agent_config_file] = "/etc/neutron/neutron-l3-agent.conf.d/100-agent.conf"
 default[:neutron][:rpc_workers] = 1
+default[:neutron][:use_ha_tool] = false
 
 default[:neutron][:db][:database] = "neutron"
 default[:neutron][:db][:user] = "neutron"
@@ -101,7 +102,7 @@ when "suse"
     dhcp_agent_pkg: "openstack-neutron-dhcp-agent",
     l3_agent_name: "openstack-neutron-l3-agent",
     l3_agent_pkg: "openstack-neutron-l3-agent",
-    ha_tool_pkg: "openstack-neutron-ha-tool",
+    ha_tool_pkg: default[:neutron][:use_ha_tool] ? "openstack-neutron-ha-tool" : "",
     hyperv_pkg: "python-networking-hyperv",
     nsx_pkgs: ["openvswitch-pki",
                    "ruby2.1-rubygem-faraday"],

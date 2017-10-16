@@ -20,7 +20,7 @@ use_lbaas_agent = node[:neutron][:use_lbaas]
 use_metadata_agent = (!node[:neutron][:ml2_mechanism_drivers].include?("cisco_apic_ml2") &&
                       !node[:neutron][:ml2_mechanism_drivers].include?("apic_gbp"))
 
-if use_l3_agent
+if use_l3_agent and node[:neutron][:use_ha_tool]
   # do the setup required for neutron-ha-tool
   package node[:neutron][:platform][:ha_tool_pkg] unless node[:neutron][:platform][:ha_tool_pkg] == ""
 
